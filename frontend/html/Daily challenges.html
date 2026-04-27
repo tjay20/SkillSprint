@@ -4,12 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillSprint - Daily Challenges</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/info-pages.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
+    <style>
+      .visual-header-icon {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .daily-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.4));
+        animation: dailyGlow 3s infinite alternate;
+      }
+      @keyframes dailyGlow {
+        from { filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4)); transform: scale(1); }
+        to { filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)); transform: scale(1.05); }
+      }
+    </style>
 </head>
 <body>
   <div class="cursor-glow"></div>
-  <canvas id="matrix"></canvas>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -26,26 +47,36 @@
   </header>
 
   <main class="page">
-    <section class="hero">
-      <h1>Daily Coding Challenges</h1>
-      <p>Short, focused challenges released every day to build consistency, logic, and problem-solving skills.</p>
-      <div class="stats">
-        <div class="stat">365 Challenges / Year</div>
-        <div class="stat">Streak Based Learning</div>
-        <div class="stat">Instant Evaluation</div>
-        <div class="stat">Skill-wise Tracking</div>
+    <header class="visual-page-header">
+      <div class="visual-header-icon">
+        <svg viewBox="0 0 100 100" class="daily-svg">
+          <defs>
+            <linearGradient id="dailyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#f59e0b;" />
+              <stop offset="100%" style="stop-color:#fb7185;" />
+            </linearGradient>
+          </defs>
+          <!-- Sun/Calendar Base -->
+          <circle cx="50" cy="50" r="35" fill="none" stroke="url(#dailyGrad)" stroke-width="4" />
+          <path d="M30,50 L70,50 M50,30 L50,70" stroke="url(#dailyGrad)" stroke-width="2" opacity="0.4" />
+          <!-- Calendar Shape -->
+          <rect x="35" y="38" width="30" height="30" rx="4" fill="url(#dailyGrad)" />
+          <rect x="40" y="34" width="4" height="8" rx="2" fill="#fff" />
+          <rect x="56" y="34" width="4" height="8" rx="2" fill="#fff" />
+          <!-- Glowing Core -->
+          <circle cx="50" cy="53" r="5" fill="#fff">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <!-- Orbiting Particle -->
+          <circle r="3" fill="#fff">
+            <animateMotion dur="4s" repeatCount="indefinite" path="M50,15 A35,35 0 1,1 49.9,15 Z" />
+          </circle>
+        </svg>
       </div>
-    </section>
-
-    <section class="ux-purpose-block" aria-label="Daily challenges guide">
-      <h3>How to use daily challenges</h3>
-      <p>Use this page for short daily practice and streak-building across different topics.</p>
-      <div class="ux-steps">
-        <div class="ux-step"><strong>Step 1:</strong> Pick one challenge card by topic or difficulty.</div>
-        <div class="ux-step"><strong>Step 2:</strong> Open the challenge and complete your attempt.</div>
-        <div class="ux-step"><strong>Step 3:</strong> Repeat daily to improve consistency and speed.</div>
-      </div>
-    </section>
+      <h1 class="visual-title">Daily <span>Challenges</span></h1>
+      <p class="visual-sub">Build consistency and master logic with focused daily sprints.</p>
+      <div class="visual-badge">⚡ 365 Days / Active</div>
+    </header>
 
     <section class="panel">
       <h2 class="section-title">Today Challenges</h2>

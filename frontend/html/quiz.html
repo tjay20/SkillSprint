@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillSprint | Quiz</title>
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/quiz.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 <body>
     <header class="topbar">
         <div class="topbar-inner">
-            <a class="brand" href="student-dashboard.html">Skill<span>Sprint</span></a>
+            <a class="brand" href="student-dashboard.html">Skill <span>Sprint</span></a>
             <nav class="nav-links" aria-label="Main">
                 <a class="nav-link" href="student-dashboard.html">Dashboard</a>
                 <a class="nav-link" href="contests.html">Contests</a>
@@ -23,9 +25,45 @@
     </header>
 
     <div class="container">
-        <header class="page-header">
-            <h1>SkillSprint Quiz</h1>
-            <p>Test your coding knowledge with multiple choice questions</p>
+        <header class="quiz-visual-header">
+            <div class="brain-outline-container">
+                <div class="binary-layer">
+                    <span style="--d:1s; --x:20%">0</span>
+                    <span style="--d:2s; --x:40%">1</span>
+                    <span style="--d:0.5s; --x:60%">0</span>
+                    <span style="--d:1.5s; --x:80%">1</span>
+                    <span style="--d:2.5s; --x:30%">1</span>
+                    <span style="--d:1.2s; --x:70%">0</span>
+                </div>
+                <svg viewBox="0 0 100 100" class="quiz-logo-svg">
+                    <defs>
+                        <linearGradient id="squareGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#34d399;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Q Square -->
+                    <rect x="5" y="5" width="42" height="42" rx="10" fill="url(#squareGrad)" class="quiz-box q-box" />
+                    <text x="26" y="34" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white" text-anchor="middle">Q</text>
+                    
+                    <!-- U Square -->
+                    <rect x="53" y="5" width="42" height="42" rx="10" fill="url(#squareGrad)" class="quiz-box u-box" />
+                    <text x="74" y="34" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white" text-anchor="middle">U</text>
+                    
+                    <!-- I Square -->
+                    <rect x="5" y="53" width="42" height="42" rx="10" fill="url(#squareGrad)" class="quiz-box i-box" />
+                    <text x="26" y="82" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white" text-anchor="middle">I</text>
+                    
+                    <!-- Z Square -->
+                    <rect x="53" y="53" width="42" height="42" rx="10" fill="url(#squareGrad)" class="quiz-box z-box" />
+                    <text x="74" y="82" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white" text-anchor="middle">Z</text>
+                </svg>
+            </div>
+            <h1 class="main-title">Quiz <span>Arena</span></h1>
+            <div class="live-indicator">
+                <span class="pulse"></span> LIVE WEB INTELLIGENCE
+            </div>
+            <p class="header-sub">Dynamic challenges sourced from global engineering banks.</p>
         </header>
 
         <div id="quiz-container">
@@ -40,15 +78,22 @@
             </section>
 
             <div class="ux-mode-tabs" role="tablist" aria-label="Quiz modes">
-                <button id="randomModeTab" class="ux-mode-tab active" type="button" data-quiz-mode="random">Random Question Bank</button>
-                <button id="legacyModeTab" class="ux-mode-tab" type="button" data-quiz-mode="legacy">Legacy Test Mode</button>
+                <button id="webModeTab" class="ux-mode-tab active" type="button" data-quiz-mode="web">Web Intelligence</button>
+                <button id="randomModeTab" class="ux-mode-tab" type="button" data-quiz-mode="random">Question Bank</button>
+                <button id="legacyModeTab" class="ux-mode-tab" type="button" data-quiz-mode="legacy">Legacy Test</button>
             </div>
 
-            <div id="randomModePanel" style="display: grid; gap: 10px; margin-bottom: 20px; border: 1px solid rgba(0,255,136,0.25); padding: 12px; border-radius: 10px;">
-                <h3 style="margin: 0; color: #00ff88;">Random Question Bank Session</h3>
+            <div id="webModePanel" style="display: grid; gap: 10px; margin-bottom: 20px; border: 1px solid rgba(16, 185, 129, 0.35); padding: 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.05);">
+                <h3 style="margin: 0; color: #10b981;">Web Intelligence Feed</h3>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin: 0;">Fetches 10 random Computer Science questions from global tech databases.</p>
+                <button id="start-web-btn" type="button" class="btn btn-primary" style="margin-top: 5px;">Fetch Live Web Quiz</button>
+            </div>
+
+            <div id="randomModePanel" class="ux-hidden" style="display: grid; gap: 10px; margin-bottom: 20px; border: 1px solid rgba(16, 185, 129, 0.25); padding: 12px; border-radius: 10px;">
+                <h3 style="margin: 0; color: #10b981;">Random Question Bank Session</h3>
 
                 <label for="language">Language</label>
-                <select id="language" style="padding: 10px; border-radius: 8px; border: 1px solid rgba(0,255,136,0.35); background: rgba(0,0,0,0.7); color: #e0ffe8;">
+                <select id="language" style="padding: 10px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(0,0,0,0.7); color: #f8fafc;">
                     <option value="C">C</option>
                     <option value="C++">C++</option>
                     <option value="C#">C#</option>
@@ -68,7 +113,7 @@
                 </select>
 
                 <label for="level">Level</label>
-                <select id="level" style="padding: 10px; border-radius: 8px; border: 1px solid rgba(0,255,136,0.35); background: rgba(0,0,0,0.7); color: #e0ffe8;">
+                <select id="level" style="padding: 10px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(0,0,0,0.7); color: #f8fafc;">
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
@@ -77,8 +122,8 @@
                 <button id="start-random-btn" type="button">Start Random 20 Questions</button>
             </div>
 
-            <div id="legacyModePanel" class="ux-hidden" style="display: grid; gap: 10px; margin-bottom: 20px; border: 1px solid rgba(0,255,136,0.15); padding: 12px; border-radius: 10px;">
-                <h3 style="margin: 0; color: #9bf7c4;">Legacy Test Mode</h3>
+            <div id="legacyModePanel" class="ux-hidden" style="display: grid; gap: 10px; margin-bottom: 20px; border: 1px solid rgba(16, 185, 129, 0.15); padding: 12px; border-radius: 10px;">
+                <h3 style="margin: 0; color: #10b981;">Legacy Test Mode</h3>
                 <label for="test-id">Test ID</label>
                 <input id="test-id" type="number" value="1" min="1" />
                 <input id="user-id" type="hidden" value="0" />
@@ -88,7 +133,7 @@
 
             <p id="status" style="margin-bottom: 15px;"></p>
 
-            <div id="timer-box" style="display: none; margin-bottom: 18px; padding: 12px; border: 1px solid rgba(0,255,136,0.22); border-radius: 10px; text-align: center;">
+            <div id="timer-box" style="display: none; margin-bottom: 18px; padding: 12px; border: 1px solid rgba(16, 185, 129, 0.22); border-radius: 10px; text-align: center;">
                 Time Left: <strong id="timer-value">30:00</strong>
             </div>
 
@@ -106,26 +151,26 @@
     <script src="../js/quiz.js"></script>
         <script>
             (function () {
+                const webTab = document.getElementById("webModeTab");
                 const randomTab = document.getElementById("randomModeTab");
                 const legacyTab = document.getElementById("legacyModeTab");
+                const webPanel = document.getElementById("webModePanel");
                 const randomPanel = document.getElementById("randomModePanel");
                 const legacyPanel = document.getElementById("legacyModePanel");
 
                 function setMode(mode) {
-                    const randomActive = mode === "random";
-                    randomTab.classList.toggle("active", randomActive);
-                    legacyTab.classList.toggle("active", !randomActive);
-                    randomPanel.classList.toggle("ux-hidden", !randomActive);
-                    legacyPanel.classList.toggle("ux-hidden", randomActive);
+                    webTab.classList.toggle("active", mode === "web");
+                    randomTab.classList.toggle("active", mode === "random");
+                    legacyTab.classList.toggle("active", mode === "legacy");
+                    
+                    webPanel.classList.toggle("ux-hidden", mode !== "web");
+                    randomPanel.classList.toggle("ux-hidden", mode !== "random");
+                    legacyPanel.classList.toggle("ux-hidden", mode !== "legacy");
                 }
 
-                randomTab.addEventListener("click", function () {
-                    setMode("random");
-                });
-
-                legacyTab.addEventListener("click", function () {
-                    setMode("legacy");
-                });
+                webTab.addEventListener("click", () => setMode("web"));
+                randomTab.addEventListener("click", () => setMode("random"));
+                legacyTab.addEventListener("click", () => setMode("legacy"));
             })();
         </script>
     <script src="../js/ux-foundation.js"></script>

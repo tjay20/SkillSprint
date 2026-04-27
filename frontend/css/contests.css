@@ -5,9 +5,13 @@
 }
 
 body {
-    font-family: "JetBrains Mono", monospace;
-    background: radial-gradient(circle at top, #020617, #000);
-    color: #e0ffe8;
+    font-family: var(--font-sans, "Inter", sans-serif);
+    background-color: var(--bg-dark, #0f1115);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-primary, #f8fafc);
     min-height: 100vh;
 }
 
@@ -15,7 +19,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 5;
-    border-bottom: 1px solid rgba(0, 255, 136, 0.24);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.24);
     background: rgba(0, 0, 0, 0.72);
     backdrop-filter: blur(12px);
 }
@@ -34,13 +38,13 @@ body {
     font-weight: 700;
     font-size: 1.05rem;
     letter-spacing: 0.02em;
-    text-shadow: 0 0 14px rgba(0, 255, 136, 0.5);
-    color: #e0ffe8;
+    text-shadow: 0 0 14px rgba(16, 185, 129, 0.5);
+    color: #f8fafc;
     text-decoration: none;
 }
 
 .brand span {
-    color: #00ff88;
+    color: #10b981;
 }
 
 .nav-links {
@@ -62,9 +66,9 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: #00ff88;
-    border-color: rgba(0, 255, 136, 0.42);
-    background: rgba(0, 255, 136, 0.08);
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.42);
+    background: rgba(16, 185, 129, 0.08);
 }
 
 .container {
@@ -72,18 +76,19 @@ body {
     margin: 2rem auto;
     width: 90%;
     background: rgba(8, 8, 8, 0.86);
-    border: 1px solid rgba(0, 255, 136, 0.24);
+    border: 1px solid rgba(16, 185, 129, 0.24);
     border-radius: 20px;
-    box-shadow: 0 0 24px rgba(0, 255, 136, 0.18), 0 20px 40px rgba(0,0,0,0.45);
+    box-shadow: 0 0 24px rgba(16, 185, 129, 0.18), 0 20px 40px rgba(0,0,0,0.45);
+    backdrop-filter: blur(14px);
     overflow: hidden;
 }
 
 .page-header {
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.22), rgba(0, 204, 170, 0.2));
-    color: #e0ffe8;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(5, 150, 105, 0.2));
+    color: #f8fafc;
     text-align: center;
     padding: 30px;
-    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .page-header h1 {
@@ -104,7 +109,7 @@ body {
     gap: 12px;
     padding: 16px 32px;
     background: rgba(0, 0, 0, 0.45);
-    border-bottom: 1px solid rgba(0, 255, 136, 0.12);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.12);
 }
 
 #user-bar label {
@@ -115,9 +120,9 @@ body {
 
 #user-bar input {
     padding: 8px 12px;
-    border: 1px solid rgba(0, 255, 136, 0.4);
+    border: 1px solid rgba(16, 185, 129, 0.4);
     background: rgba(0, 0, 0, 0.7);
-    color: #e0ffe8;
+    color: #f8fafc;
     border-radius: 8px;
     font-size: 0.95rem;
     width: 100px;
@@ -139,7 +144,7 @@ body {
 
 .section-header h2,
 h2 {
-    color: #00ff88;
+    color: #10b981;
     font-size: 1.6em;
 }
 
@@ -152,14 +157,14 @@ h3 {
 #refresh-btn,
 #submit-btn {
     padding: 10px 22px;
-    background: linear-gradient(135deg, #00ff88, #00ccaa);
+    background: linear-gradient(135deg, #10b981, #059669);
     color: #00140d;
     border: none;
     border-radius: 10px;
     font-size: 0.95rem;
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0 0 16px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
 }
 
 #submit-btn {
@@ -181,8 +186,8 @@ h3 {
 
 .back-btn {
     background: none;
-    border: 1px solid rgba(0, 255, 136, 0.45);
-    color: #00ff88;
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #10b981;
     border-radius: 8px;
     padding: 8px 16px;
     cursor: pointer;
@@ -191,12 +196,12 @@ h3 {
 }
 
 .back-btn:hover {
-    background: rgba(0, 255, 136, 0.08);
+    background: rgba(16, 185, 129, 0.08);
 }
 
 /* ── Cards ─────────────────────────────────────────────────────────────────── */
 .card {
-    border: 1px solid rgba(0, 255, 136, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.2);
     background: rgba(0, 0, 0, 0.35);
     border-radius: 12px;
     padding: 18px 20px;
@@ -206,12 +211,12 @@ h3 {
 }
 
 .card:hover {
-    box-shadow: 0 0 18px rgba(0,255,136,0.2);
-    border-color: rgba(0,255,136,0.6);
+    box-shadow: 0 0 18px rgba(16,185,129,0.2);
+    border-color: rgba(16,185,129,0.6);
 }
 
 .card.active {
-    border-left: 4px solid #38ef7d;
+    border-left: 4px solid #10b981;
 }
 
 .card.inactive {
@@ -221,7 +226,7 @@ h3 {
 .card-title {
     font-size: 1.1em;
     font-weight: bold;
-    color: #e0ffe8;
+    color: #f8fafc;
     margin-bottom: 6px;
     display: flex;
     align-items: center;
@@ -269,12 +274,12 @@ h3 {
 /* ── Problem statement ─────────────────────────────────────────────────────── */
 .problem-statement {
     background: rgba(0, 0, 0, 0.45);
-    border-left: 4px solid #00ff88;
+    border-left: 4px solid #10b981;
     border-radius: 6px;
     padding: 14px 18px;
     font-size: 0.97em;
     line-height: 1.7;
-    color: #e0ffe8;
+    color: #f8fafc;
     margin: 14px 0;
     white-space: pre-wrap;
 }
@@ -283,7 +288,7 @@ h3 {
 .submit-form {
     margin-top: 28px;
     padding-top: 24px;
-    border-top: 1px solid rgba(0, 255, 136, 0.2);
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .submit-form h3 {
@@ -301,24 +306,24 @@ h3 {
 .submit-form select {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid rgba(0, 255, 136, 0.35);
+    border: 1px solid rgba(16, 185, 129, 0.35);
     border-radius: 8px;
     font-size: 0.95rem;
     background: rgba(0, 0, 0, 0.7);
-    color: #e0ffe8;
+    color: #f8fafc;
 }
 
 .submit-form textarea {
     width: 100%;
     height: 220px;
     padding: 12px;
-    border: 1px solid rgba(0, 255, 136, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 8px;
     font-family: 'Courier New', monospace;
     font-size: 0.88rem;
     resize: vertical;
     background: rgba(0, 0, 0, 0.7);
-    color: #e0ffe8;
+    color: #f8fafc;
     line-height: 1.5;
 }
 

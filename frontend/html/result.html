@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkillSprint | Quiz Result</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/result.css">
-    <link rel="stylesheet" href="../css/ux-foundation.css">
+  <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 <body>
   <header class="topbar">
@@ -22,77 +24,124 @@
     </div>
   </header>
 
-  <main>
-    <div class="hero">
-      <h1>Quiz Result</h1>
-      <p>Your performance and profile summary</p>
+  <!-- Offline Overlay -->
+  <div id="offlineOverlay" class="offline-overlay" style="display: none;">
+    <div class="offline-content">
+      <svg class="offline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="8" y1="8" x2="16" y2="16"></line>
+        <line x1="16" y1="8" x2="8" y2="16"></line>
+      </svg>
+      <h2>Results Currently Offline</h2>
+      <p>Your instructor has temporarily made results unavailable. Please check back later.</p>
     </div>
+  </div>
 
-    <div class="grid-2col">
-      <section class="panel">
-        <h2>Score Summary</h2>
-        <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-label">Score</div>
-            <div class="stat-value" id="scoreValue">--</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Total Questions</div>
-            <div class="stat-value" id="totalValue">--</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Unanswered</div>
-            <div class="stat-value" id="unansweredValue">--</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Mode</div>
-            <div class="stat-value" id="modeValue">--</div>
+  <main class="result-main">
+    <!-- Hero Section -->
+    <section class="result-hero">
+      <h1>Your Quiz Results</h1>
+      <p>Performance Summary & Profile Information</p>
+    </section>
+
+    <!-- Student Profile Card -->
+    <div class="result-container">
+      <section class="student-profile-card">
+        <div class="profile-photo-container">
+          <img id="studentPhoto" src="https://via.placeholder.com/150" alt="Student Photo" class="profile-photo">
+          <div class="photo-glow"></div>
+        </div>
+
+        <div class="student-details">
+          <h2 id="studentName">--</h2>
+          <p id="studentEmail" class="student-email">--</p>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <label>SRN</label>
+              <span id="detailSRN">--</span>
+            </div>
+            <div class="detail-item">
+              <label>PRN</label>
+              <span id="detailPRN">--</span>
+            </div>
+            <div class="detail-item">
+              <label>Class</label>
+              <span id="detailClass">--</span>
+            </div>
+            <div class="detail-item">
+              <label>Year</label>
+              <span id="detailYear">--</span>
+            </div>
+            <div class="detail-item">
+              <label>Branch</label>
+              <span id="detailBranch">--</span>
+            </div>
+            <div class="detail-item">
+              <label>Roll No</label>
+              <span id="detailRollNo">--</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>Quiz Details</h2>
-        <div class="details-list">
-          <div class="detail-row">
-            <span class="detail-label">Quiz Type:</span>
-            <span class="detail-value" id="quizTypeValue">--</span>
+      <!-- Score Summary Section -->
+      <section class="score-summary-section">
+        <h3>Score Summary</h3>
+        
+        <div class="score-visual">
+          <div class="circular-progress">
+            <svg class="progress-ring" width="200" height="200" viewBox="0 0 200 200">
+              <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#0099ff;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="95" class="progress-background"></circle>
+              <circle id="progressCircle" cx="100" cy="100" r="95" class="progress-fill"></circle>
+            </svg>
+            <div class="progress-text">
+              <span id="scorePercentage" class="score-percentage">0%</span>
+              <span class="score-label">Correct</span>
+            </div>
           </div>
-          <div class="detail-row">
-            <span class="detail-label">Language:</span>
-            <span class="detail-value" id="languageValue">--</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Level:</span>
-            <span class="detail-value" id="levelValue">--</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Submitted:</span>
-            <span class="detail-value" id="submittedAtValue">--</span>
+
+          <div class="score-breakdown">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Score</span>
+              <span id="breakdownScore" class="breakdown-value score-value">0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Total Questions</span>
+              <span id="breakdownTotal" class="breakdown-value">0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Submission Date</span>
+              <span id="breakdownDate" class="breakdown-value date-value">--</span>
+            </div>
           </div>
         </div>
+
+        <!-- Action Buttons -->
+        <div class="result-actions">
+          <button id="downloadPdfBtn" class="btn btn-primary pdf-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="19" x2="12" y2="12"></line>
+              <line x1="9" y1="16" x2="15" y2="16"></line>
+            </svg>
+            Download as PDF
+          </button>
+          <a href="quiz.html" class="btn btn-secondary">Take Another Quiz</a>
+          <a href="student-dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+        </div>
       </section>
-    </div>
-
-    <section class="panel">
-      <h2>Student Profile</h2>
-      <div class="profile-table">
-        <tbody id="profileTable"></tbody>
-      </div>
-    </section>
-
-    <section class="panel notes-panel">
-      <h2>Summary</h2>
-      <ul id="noteList" class="notes-list"></ul>
-    </section>
-
-    <div class="action-buttons">
-      <a href="quiz.html" class="btn btn-secondary">Take Another Quiz</a>
-      <a href="student-dashboard.html" class="btn btn-primary">Back to Dashboard</a>
     </div>
   </main>
 
   <script src="../js/result.js"></script>
-    <script src="../js/ux-foundation.js"></script>
+  <script src="../js/ux-foundation.js"></script>
 </body>
 </html>

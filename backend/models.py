@@ -205,3 +205,19 @@ class Follow(Base):
 
     follower = relationship("User", foreign_keys=[follower_id])
     following_user = relationship("User", foreign_keys=[following_id])
+
+
+class ResultVisibility(Base):
+    __tablename__ = "result_visibility"
+    __table_args__ = (UniqueConstraint("year", "branch", "division", "subject", name="uq_result_visibility"),)
+
+    id = Column(Integer, primary_key=True, index=True)
+    year = Column(Integer, nullable=False)
+    branch = Column(String, nullable=False)
+    division = Column(String, nullable=False)
+    subject = Column(String, nullable=False)
+    is_online = Column(Boolean, default=True, nullable=False)
+    updated_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+    admin = relationship("User")

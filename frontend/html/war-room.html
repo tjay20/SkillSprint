@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSprint | Virtual War Room</title>
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/ux-foundation.css">
+    <link rel="stylesheet" href="../css/war-room.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="student-dashboard.html">Skill<span>Sprint</span></a>
+            <div class="war-room-badge">WAR ROOM: Team Alpha</div>
+            <nav class="nav-links" aria-label="Main">
+                <a class="nav-link" href="student-dashboard.html">Dashboard</a>
+                <a class="nav-link" href="hackathons.html">Hackathons</a>
+                <a class="nav-link active" href="#">War Room</a>
+                <a class="nav-link" href="profile.html">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="war-room-grid">
+            
+            <!-- LEFT: TEAM & STATUS -->
+            <aside class="team-panel">
+                <div class="card">
+                    <h3>Team Members</h3>
+                    <div class="member-list">
+                        <div class="member-item">
+                            <img src="../images/default-avatar.svg" class="avatar-small">
+                            <div class="member-info">
+                                <b>Jay (You)</b>
+                                <span class="status online">Coding...</span>
+                            </div>
+                        </div>
+                        <div class="member-item">
+                            <img src="../images/default-avatar.svg" class="avatar-small">
+                            <div class="member-info">
+                                <b>Sarah J.</b>
+                                <span class="status online">Designing</span>
+                            </div>
+                        </div>
+                        <div class="member-item">
+                            <img src="../images/default-avatar.svg" class="avatar-small">
+                            <div class="member-info">
+                                <b>Alex C.</b>
+                                <span class="status idle">Away</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline call-mentor-btn" onclick="SkillSprintUX.showStatus('Mentor has been alerted and will join shortly.')">🆘 Call Mentor</button>
+                </div>
+
+                <div class="card countdown-card">
+                    <h3>Deadline</h3>
+                    <div class="timer">14:22:05</div>
+                    <p>Remaining for Final Submission</p>
+                </div>
+            </aside>
+
+            <!-- CENTER: TASK BOARD -->
+            <section class="task-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Shared Task Board</h3>
+                        <button class="btn btn-primary btn-sm">+ Add Task</button>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item done">
+                            <input type="checkbox" checked disabled>
+                            <span>Initialize React Project</span>
+                            <span class="assignee">Jay</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox">
+                            <span>Integrate Firebase Auth</span>
+                            <span class="assignee">Alex</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox">
+                            <span>Finalize Landing Page UI</span>
+                            <span class="assignee">Sarah</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox">
+                            <span>Prepare Pitch Deck</span>
+                            <span class="assignee">Team</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card submission-card">
+                    <h3>Submission Area</h3>
+                    <div class="drop-zone" onclick="SkillSprintUX.showStatus('Submission system open.')">
+                        <p>Drop your project ZIP or link here</p>
+                        <span>No files uploaded yet</span>
+                    </div>
+                    <button class="btn btn-success" style="width: 100%; margin-top: 1rem;">Submit to Judges</button>
+                </div>
+            </section>
+
+            <!-- RIGHT: CHAT / FEED -->
+            <aside class="feed-panel">
+                <div class="card chat-card">
+                    <h3>Team Chat</h3>
+                    <div class="chat-messages">
+                        <div class="msg"><b>Sarah:</b> UI is looking sick!</div>
+                        <div class="msg"><b>Alex:</b> Just finished the API endpoints.</div>
+                        <div class="msg me"><b>Jay:</b> Great, I'll start linking them now.</div>
+                    </div>
+                    <div class="chat-input-wrap">
+                        <input type="text" placeholder="Type a message...">
+                        <button>Send</button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <script src="../js/ux-foundation.js"></script>
+</body>
+</html>

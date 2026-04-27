@@ -4,12 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillSprint - Learning Tracks</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/info-pages.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
+    <style>
+      .visual-header-icon {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .roadmap-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
+        animation: roadmapFloat 4s infinite ease-in-out;
+      }
+      @keyframes roadmapFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-5px) rotate(3deg); }
+      }
+    </style>
 </head>
 <body>
   <div class="cursor-glow"></div>
-  <canvas id="matrix"></canvas>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -26,26 +47,33 @@
   </header>
 
   <main class="page">
-    <section class="hero">
-      <h1>All Learning Tracks</h1>
-      <p>Choose structured tracks designed to build strong foundations, practical skills, and industry readiness step by step.</p>
-      <div class="stats">
-        <div class="stat">Beginner to Advanced</div>
-        <div class="stat">Project Based</div>
-        <div class="stat">Assessment Ready</div>
-        <div class="stat">Career Focused</div>
+    <header class="visual-page-header">
+      <div class="visual-header-icon">
+        <svg viewBox="0 0 100 100" class="roadmap-svg">
+          <defs>
+            <linearGradient id="trackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#10b981;" />
+              <stop offset="100%" style="stop-color:#3b82f6;" />
+            </linearGradient>
+          </defs>
+          <!-- Roadmap Path -->
+          <path d="M20,80 C20,80 40,70 50,50 C60,30 80,20 80,20" stroke="url(#trackGrad)" stroke-width="6" fill="none" stroke-dasharray="10,5" stroke-linecap="round" />
+          <!-- Nodes -->
+          <circle cx="20" cy="80" r="6" fill="url(#trackGrad)" />
+          <circle cx="50" cy="50" r="8" fill="url(#trackGrad)" />
+          <circle cx="80" cy="20" r="10" fill="url(#trackGrad)">
+            <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <!-- Compass Needle -->
+          <path d="M50,42 L55,50 L50,58 L45,50 Z" fill="#fff">
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="10s" repeatCount="indefinite" />
+          </path>
+        </svg>
       </div>
-    </section>
-
-    <section class="ux-purpose-block" aria-label="Learning tracks guide">
-      <h3>How to use learning tracks</h3>
-      <p>Use this page to pick a structured roadmap and start targeted practice for that domain.</p>
-      <div class="ux-steps">
-        <div class="ux-step"><strong>Step 1:</strong> Review track descriptions and skill tags.</div>
-        <div class="ux-step"><strong>Step 2:</strong> Choose one track based on your current goal.</div>
-        <div class="ux-step"><strong>Step 3:</strong> Open track practice or registration link to start.</div>
-      </div>
-    </section>
+      <h1 class="visual-title">Learning <span>Tracks</span></h1>
+      <p class="visual-sub">Structured roadmaps designed to take you from beginner to industry-ready.</p>
+      <div class="visual-badge">🗺️ Guided Roadmaps / Active</div>
+    </header>
 
     <section class="panel">
       <h2 class="section-title">Available Tracks</h2>

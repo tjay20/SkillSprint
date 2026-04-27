@@ -6,14 +6,15 @@
   <title>SkillSprint | User Profile</title>
 
   <!-- External CSS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 
 <body>
 
-  <!-- NEON BACKGROUND -->
-  <canvas id="neon-bg"></canvas>
+
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -185,6 +186,67 @@
             <div class="time">⏱ 25 min</div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- SKILL RADAR CHART -->
+      <div class="card radar-card">
+        <h3>Skill Distribution</h3>
+        <div class="radar-container">
+          <svg viewBox="0 0 100 100" class="radar-chart">
+            <!-- Background Web -->
+            <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <polygon points="50,20 80,35 80,65 50,80 20,65 20,35" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <polygon points="50,35 65,42.5 65,57.5 50,65 35,57.5 35,42.5" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <!-- Axes -->
+            <line x1="50" y1="50" x2="50" y2="5" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <line x1="50" y1="50" x2="95" y2="27.5" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <line x1="50" y1="50" x2="95" y2="72.5" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <line x1="50" y1="50" x2="50" y2="95" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <line x1="50" y1="50" x2="5" y2="72.5" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <line x1="50" y1="50" x2="5" y2="27.5" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5"/>
+            <!-- Skill Data Polygon (Dynamic via JS, mocked here) -->
+            <polygon points="50,15 85,30 75,60 50,75 30,65 15,35" fill="rgba(16, 185, 129, 0.35)" stroke="#10b981" stroke-width="1.5" class="radar-data-path"/>
+          </svg>
+          <div class="radar-labels">
+            <span class="label top">Algorithms</span>
+            <span class="label top-right">Data Structures</span>
+            <span class="label bottom-right">Web Dev</span>
+            <span class="label bottom">Databases</span>
+            <span class="label bottom-left">System Design</span>
+            <span class="label top-left">OOP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY HEATMAP -->
+      <div class="card heatmap-card">
+        <h3>Annual Activity</h3>
+        <div class="heatmap-container">
+          <div class="heatmap-grid" id="heatmapGrid">
+            <!-- JS will generate 52 columns x 7 rows of divs here -->
+            <script>
+              // Mocking some heatmap data visually
+              document.write(Array.from({length: 364}, () => {
+                const val = Math.random();
+                let cls = 'heatmap-cell';
+                if(val > 0.9) cls += ' level-4';
+                else if(val > 0.7) cls += ' level-3';
+                else if(val > 0.5) cls += ' level-2';
+                else if(val > 0.3) cls += ' level-1';
+                return `<div class="${cls}"></div>`;
+              }).join(''));
+            </script>
+          </div>
+        </div>
+        <div class="heatmap-legend">
+          <span>Less</span>
+          <div class="heatmap-cell"></div>
+          <div class="heatmap-cell level-1"></div>
+          <div class="heatmap-cell level-2"></div>
+          <div class="heatmap-cell level-3"></div>
+          <div class="heatmap-cell level-4"></div>
+          <span>More</span>
         </div>
       </div>
 

@@ -6,10 +6,51 @@
   <title>SkillSprint - Weekend Sprint</title>
   <link rel="stylesheet" href="../css/info-pages.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
+    <style>
+      .visual-header-icon {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .shoe-sprint-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+      }
+
+      .shoe-body {
+        fill: url(#shoeGrad);
+        stroke: #fff;
+        stroke-width: 2;
+        animation: shoeBounce 2s infinite ease-in-out;
+      }
+
+      .speed-line {
+        stroke: #0ea5e9;
+        stroke-width: 4;
+        stroke-linecap: round;
+        opacity: 0.6;
+        animation: speedMove 0.8s infinite linear;
+      }
+
+      @keyframes shoeBounce {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-5px) rotate(-2deg); }
+      }
+
+      @keyframes speedMove {
+        0% { transform: translateX(0); opacity: 0; }
+        50% { opacity: 0.6; }
+        100% { transform: translateX(20px); opacity: 0; }
+      }
+    </style>
 </head>
 <body>
   <div class="cursor-glow"></div>
-  <canvas id="matrix"></canvas>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -26,26 +67,46 @@
   </header>
 
   <main class="page">
-    <section class="hero">
-      <h1>Join Next Weekend Sprint</h1>
-      <p>Intensive 48-hour guided sprint focused on building one complete, resume-ready project with mentor support and peer collaboration.</p>
-      <div class="stats">
-        <div class="stat">48-Hour Sprint</div>
-        <div class="stat">Mentor Guided</div>
-        <div class="stat">Team Based</div>
-        <div class="stat">Certificate Provided</div>
+    <header class="visual-page-header">
+      <div class="visual-header-icon">
+        <svg viewBox="0 0 100 100" class="shoe-sprint-svg">
+          <defs>
+            <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0ea5e9;" />
+              <stop offset="100%" style="stop-color:#38bdf8;" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Motion/Speed Lines -->
+          <line x1="5" y1="35" x2="20" y2="35" class="speed-line" style="animation-delay: 0s" />
+          <line x1="0" y1="50" x2="15" y2="50" class="speed-line" style="animation-delay: 0.2s" />
+          <line x1="5" y1="65" x2="20" y2="65" class="speed-line" style="animation-delay: 0.4s" />
+          <line x1="10" y1="80" x2="25" y2="80" class="speed-line" style="animation-delay: 0.6s" />
+          
+          <!-- Improved Shoe Shape (Nike Style) -->
+          <g class="shoe-body">
+            <!-- Sole with Air Bubble -->
+            <path d="M25,80 L95,80 L95,88 L25,88 Z" fill="#fff" />
+            <rect x="70" y="82" width="15" height="4" rx="2" fill="#0ea5e9" opacity="0.4" /> <!-- Air Bubble -->
+            
+            <!-- Main Body -->
+            <path d="M35,35 C45,30 55,30 65,40 L80,65 C90,72 100,75 100,80 L25,80 L35,35 Z" />
+            
+            <!-- Nike Swoosh -->
+            <path d="M45,60 C55,60 75,55 85,45 C75,55 55,65 40,65 C35,65 35,62 38,60" fill="#fff" opacity="0.9" />
+            
+            <!-- Toe Cap -->
+            <path d="M90,75 C100,78 100,80 100,80 L90,80 Z" fill="#fff" opacity="0.3" />
+            
+            <!-- Laces -->
+            <path d="M60,45 L75,45 M65,55 L80,55" stroke="#fff" stroke-width="2.5" opacity="0.8" />
+          </g>
+        </svg>
       </div>
-    </section>
-
-    <section class="ux-purpose-block" aria-label="Weekend sprint guide">
-      <h3>How to use weekend sprint page</h3>
-      <p>Use this page to select a sprint track and move directly to registration or preparation.</p>
-      <div class="ux-steps">
-        <div class="ux-step"><strong>Step 1:</strong> Compare upcoming sprint tracks and tags.</div>
-        <div class="ux-step"><strong>Step 2:</strong> Choose the sprint aligned with your goal.</div>
-        <div class="ux-step"><strong>Step 3:</strong> Register or start preparation from linked pages.</div>
-      </div>
-    </section>
+      <h1 class="visual-title">Weekend <span>Sprint</span></h1>
+      <p class="visual-sub">Intensive 48-hour guided sessions to build resume-ready projects.</p>
+      <div class="visual-badge">🚀 Upcoming: 48-Hour Live</div>
+    </header>
 
     <section class="panel">
       <h2 class="section-title">Upcoming Weekend Sprint Tracks</h2>

@@ -90,6 +90,23 @@ def ensure_sqlite_compatibility():
             if "submitted_at" not in submission_columns:
                 connection.execute(text("ALTER TABLE contest_submissions ADD COLUMN submitted_at DATETIME"))
 
+        if "result_visibility" not in tables:
+            connection.execute(text("""
+                CREATE TABLE result_visibility (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL,
+                    branch VARCHAR NOT NULL,
+                    division VARCHAR NOT NULL,
+                    subject VARCHAR NOT NULL,
+                    is_online BOOLEAN NOT NULL DEFAULT 1,
+                    updated_by INTEGER,
+                    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (updated_by) REFERENCES users (id),
+                    UNIQUE (year, branch, division, subject)
+                )
+            """))
+
+
 def get_db():
     db = SessionLocal()
     try:

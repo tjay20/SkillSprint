@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSprint | Team Builder</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/ux-foundation.css">
+  <link rel="stylesheet" href="../css/team-builder.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="student-dashboard.html">Skill<span>Sprint</span></a>
+      <nav class="nav-links" aria-label="Main">
+        <a class="nav-link" href="student-dashboard.html">Dashboard</a>
+        <a class="nav-link" href="hackathons.html">Hackathons</a>
+        <a class="nav-link active" href="team-builder.html">Team Builder</a>
+        <a class="nav-link" href="project-gallery.html">Gallery</a>
+        <a class="nav-link" href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="builder-header">
+      <h1>Find Your Hackathon Dream Team</h1>
+      <p>Swipe right to send a team invite, swipe left to pass. Filter by required skills and roles.</p>
+      <div class="filters">
+        <select class="filter-select">
+          <option>All Roles</option>
+          <option>Frontend Dev</option>
+          <option>Backend Dev</option>
+          <option>UI/UX Designer</option>
+          <option>AI/ML Engineer</option>
+        </select>
+        <select class="filter-select">
+          <option>All Hackathons</option>
+          <option>Green Tech Hackathon</option>
+          <option>AI for Campus</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="swipe-container">
+      <div class="swipe-card" id="activeCard">
+        <div class="card-image-wrap">
+          <img src="../images/default-avatar.svg" alt="User Avatar" class="card-avatar">
+          <div class="match-badge">95% Match</div>
+        </div>
+        <div class="card-info">
+          <h2>Sarah Jenkins, 20</h2>
+          <p class="role-text">Frontend Developer · 3rd Year CSE</p>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Figma</span>
+          </div>
+          <div class="stats-row">
+            <div class="stat-col"><strong>1420</strong><span>Elo Rating</span></div>
+            <div class="stat-col"><strong>3</strong><span>Hackathons Won</span></div>
+          </div>
+          <p class="bio">"Looking for a backend dev and AI engineer to build a smart attendance system for the AI Hackathon."</p>
+        </div>
+        <div class="swipe-actions">
+          <button class="action-btn pass-btn" onclick="nextCard()">❌ Pass</button>
+          <button class="action-btn invite-btn" onclick="nextCard()">👋 Invite to Team</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function nextCard() {
+      const card = document.getElementById('activeCard');
+      card.style.transform = 'scale(0.95) translateY(20px)';
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.style.transform = 'none';
+        card.style.opacity = '1';
+        card.querySelector('h2').innerText = 'Alex Chen, 21';
+        card.querySelector('.role-text').innerText = 'Backend Developer · 4th Year';
+        card.querySelector('.bio').innerText = '"I build robust APIs. Need a frontend team for Green Tech."';
+      }, 300);
+    }
+  </script>
+</body>
+</html>

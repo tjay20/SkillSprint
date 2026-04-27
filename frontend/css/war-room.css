@@ -1,0 +1,240 @@
+body {
+    background: #0f1115;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.war-room-badge {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.war-room-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 300px;
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+.card {
+    background: rgba(20, 23, 28, 0.7);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 16px;
+    padding: 1.2rem;
+    backdrop-filter: blur(12px);
+    margin-bottom: 1.5rem;
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Member List */
+.member-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.member-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.avatar-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+}
+
+.member-info b {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.status {
+    font-size: 0.7rem;
+    color: #9ca3af;
+}
+
+.status.online {
+    color: #10b981;
+}
+
+.call-mentor-btn {
+    width: 100%;
+    border-color: #f87171;
+    color: #f87171;
+}
+
+.call-mentor-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Countdown */
+.timer {
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f87171;
+    text-align: center;
+}
+
+.countdown-card p {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-top: 0.5rem;
+}
+
+/* Task Board */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+
+.task-item:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.task-item.done {
+    opacity: 0.6;
+}
+
+.task-item.done span {
+    text-decoration: line-through;
+}
+
+.assignee {
+    margin-left: auto;
+    font-size: 0.7rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Submission */
+.drop-zone {
+    border: 2px dashed rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.drop-zone:hover {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.drop-zone p {
+    margin-bottom: 0.5rem;
+}
+
+.drop-zone span {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Chat */
+.chat-card {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.msg {
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+}
+
+.msg.me {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    align-self: flex-end;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+}
+
+.chat-input-wrap {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input-wrap input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #fff;
+    padding: 0.6rem;
+    border-radius: 8px;
+    outline: none;
+}
+
+.chat-input-wrap button {
+    background: #10b981;
+    border: none;
+    color: #000;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .war-room-grid {
+        grid-template-columns: 1fr;
+    }
+}

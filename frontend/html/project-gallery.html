@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSprint | Project Gallery</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/ux-foundation.css">
+  <link rel="stylesheet" href="../css/project-gallery.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="student-dashboard.html">Skill<span>Sprint</span></a>
+      <nav class="nav-links" aria-label="Main">
+        <a class="nav-link" href="student-dashboard.html">Dashboard</a>
+        <a class="nav-link" href="hackathons.html">Hackathons</a>
+        <a class="nav-link" href="team-builder.html">Team Builder</a>
+        <a class="nav-link active" href="project-gallery.html">Gallery</a>
+        <a class="nav-link" href="profile.html">Profile</a>
+      </nav>
+      <button class="btn btn-primary" style="margin:0; padding: 0.4rem 1rem;">Submit Project</button>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="gallery-header">
+      <h1>Hackathon Submissions</h1>
+      <p>Discover, review, and upvote the best projects built during SkillSprint Hackathons.</p>
+      
+      <div class="tabs">
+        <button class="tab active">Trending Today</button>
+        <button class="tab">Top Rated</button>
+        <button class="tab">Recent Submissions</button>
+      </div>
+    </div>
+
+    <div class="project-list">
+      
+      <div class="project-card">
+        <div class="project-rank">#1</div>
+        <img src="../images/project-placeholder.svg" class="project-thumbnail" alt="Project Thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzEwYjk4MSIvPjwvc3ZnPg=='">
+        <div class="project-details">
+          <h2>Campus AI Assistant</h2>
+          <p>A context-aware chatbot that integrates with university systems to automate attendance and course registration.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">OpenAI</span>
+            <span class="tag">React</span>
+          </div>
+          <div class="team-avatars">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+          </div>
+        </div>
+        <button class="upvote-btn upvoted">
+          <span class="arrow">▲</span>
+          <span class="count">428</span>
+        </button>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">#2</div>
+        <img src="../images/project-placeholder.svg" class="project-thumbnail" alt="Project Thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzA1OTY2OSIvPjwvc3ZnPg=='">
+        <div class="project-details">
+          <h2>EcoTrack Green App</h2>
+          <p>Mobile app encouraging students to track carbon footprint on campus with gamified rewards.</p>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Firebase</span>
+          </div>
+          <div class="team-avatars">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+          </div>
+        </div>
+        <button class="upvote-btn">
+          <span class="arrow">▲</span>
+          <span class="count">315</span>
+        </button>
+      </div>
+
+      <div class="project-card">
+        <div class="project-rank">#3</div>
+        <img src="../images/project-placeholder.svg" class="project-thumbnail" alt="Project Thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzJkZDRiZiIvPjwvc3ZnPg=='">
+        <div class="project-details">
+          <h2>Code Battle Platform</h2>
+          <p>Real-time 1v1 coding arena using WebSockets and Docker sandboxing.</p>
+          <div class="tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Socket.io</span>
+          </div>
+          <div class="team-avatars">
+            <img src="../images/default-avatar.svg" alt="User" class="avatar-small">
+          </div>
+        </div>
+        <button class="upvote-btn">
+          <span class="arrow">▲</span>
+          <span class="count">290</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

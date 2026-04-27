@@ -499,3 +499,62 @@ class SearchResult(BaseModel):
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
     bio: Optional[str] = None
+
+
+class ResultVisibilityOut(BaseModel):
+    id: int
+    year: int
+    branch: str
+    division: str
+    subject: str
+    is_online: bool
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ResultVisibilityUpdate(BaseModel):
+    is_online: bool
+
+
+class StudentResultOut(BaseModel):
+    id: int
+    name: str
+    email: str
+    avatar_url: Optional[str]
+    srn: Optional[str]
+    prn: Optional[str]
+    year: Optional[int]
+    branch: Optional[str]
+    division: Optional[str]
+    roll_no: Optional[str]
+    quiz_score: int
+    total_questions: int
+    submission_count: int
+    submitted_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class AutoQuestionOption(BaseModel):
+    label: str
+    text: str
+
+
+class AutoQuestionRequest(BaseModel):
+    topic: str
+    language: str
+    difficulty: str = Field(default="Beginner", pattern="^(Beginner|Intermediate|Advanced)$")
+    count: int = Field(default=5, ge=1, le=50)
+
+
+class AutoQuestionResponse(BaseModel):
+    question_id: Optional[int] = None
+    text: str
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    correct_option: str

@@ -13,7 +13,13 @@
 ========================= */
 body {
   min-height: 100vh;
-  background: transparent;
+  background: var(--bg-dark, #0f1115);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #ffffff;
   padding: 32px;
   overflow-x: hidden;
@@ -902,4 +908,101 @@ body {
   .details-modal-head h3 {
     font-size: 24px;
   }
+/* =========================
+   ADVANCED GAMIFICATION (PHASE 1)
+========================= */
+
+.radar-card {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radar-container {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 1;
+  margin: 1.5rem auto;
+}
+
+.radar-chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.radar-data-path {
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+  animation: pulseRadar 3s infinite alternate;
+}
+
+@keyframes pulseRadar {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.9)); }
+}
+
+.radar-labels .label {
+  position: absolute;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.radar-labels .top { top: -15%; left: 50%; transform: translateX(-50%); }
+.radar-labels .top-right { top: 15%; right: -15%; }
+.radar-labels .bottom-right { bottom: 15%; right: -15%; }
+.radar-labels .bottom { bottom: -15%; left: 50%; transform: translateX(-50%); }
+.radar-labels .bottom-left { bottom: 15%; left: -15%; }
+.radar-labels .top-left { top: 15%; left: -15%; }
+
+.heatmap-card {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.heatmap-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 3px;
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+.heatmap-cell {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  transition: transform 0.1s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.5);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  z-index: 2;
+}
+
+.heatmap-cell.level-1 { background: rgba(16, 185, 129, 0.25); }
+.heatmap-cell.level-2 { background: rgba(16, 185, 129, 0.5); }
+.heatmap-cell.level-3 { background: rgba(16, 185, 129, 0.75); }
+.heatmap-cell.level-4 { background: rgba(16, 185, 129, 1); box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); }
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
 }

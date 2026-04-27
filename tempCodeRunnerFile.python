@@ -1,0 +1,26 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# User input
+n = int(input("Enter number of data points: "))
+
+x = []
+y = []
+
+print("Enter X and Y values:")
+for i in range(n):
+    xi = float(input(f"X[{i}]: "))
+    yi = float(input(f"Y[{i}]: "))
+    x.append(xi)
+    y.append(yi)
+
+# Create DataFrame
+df = pd.DataFrame({"X": x, "Y": y})
+
+# Plot regression
+sns.regplot(x="X", y="Y", data=df)
+
+plt.title("Regression Plot")
+plt.show()
+

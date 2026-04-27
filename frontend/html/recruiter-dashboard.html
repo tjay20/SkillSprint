@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSprint | Recruiter Dashboard</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/ux-foundation.css">
+  <link rel="stylesheet" href="../css/recruiter-dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="recruiter-dashboard.html">Skill<span>Sprint</span> <span>For Recruiters</span></a>
+      <nav class="nav-links" aria-label="Main">
+        <a class="nav-link active" href="recruiter-dashboard.html">Candidate Search</a>
+        <a class="nav-link" href="#">Saved Profiles</a>
+        <a class="nav-link" href="#">Messages</a>
+      </nav>
+      <div class="profile-avatar" style="background-image: url('../images/default-avatar.svg');"></div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <aside class="sidebar">
+      <h3>Filter Candidates</h3>
+      
+      <div class="filter-group">
+        <label>Skill Tags</label>
+        <input type="text" class="filter-input" placeholder="e.g. React, Python, DSA">
+      </div>
+
+      <div class="filter-group">
+        <label>Minimum Elo Rating</label>
+        <input type="range" min="800" max="2500" value="1200" class="filter-slider" oninput="eloValue.innerText=this.value">
+        <div class="slider-val">>= <span id="eloValue">1200</span></div>
+      </div>
+
+      <div class="filter-group">
+        <label>Hackathon Wins</label>
+        <select class="filter-select">
+          <option>Any</option>
+          <option>1+</option>
+          <option>3+</option>
+          <option>5+</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Graduation Year</label>
+        <select class="filter-select">
+          <option>Any</option>
+          <option>2024</option>
+          <option>2025</option>
+          <option>2026</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+    </aside>
+
+    <div class="main-content">
+      <div class="content-header">
+        <h1>Top Engineering Talent</h1>
+        <p>Showing 245 candidates matching your criteria</p>
+      </div>
+
+      <div class="candidate-grid">
+        
+        <div class="candidate-card">
+          <div class="card-top">
+            <img src="../images/default-avatar.svg" class="candidate-avatar">
+            <div class="candidate-info">
+              <h2>Arjun Patel</h2>
+              <p>Full Stack Engineer · 2025</p>
+            </div>
+            <button class="save-btn">★</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat"><span class="label">Elo Rating</span><span class="val">1850</span></div>
+            <div class="stat"><span class="label">Hackathons</span><span class="val">4 Won</span></div>
+            <div class="stat"><span class="label">Questions</span><span class="val">320 Solved</span></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">React</span>
+          </div>
+          <button class="btn btn-outline" style="width:100%">View Full Portfolio</button>
+        </div>
+
+        <div class="candidate-card">
+          <div class="card-top">
+            <img src="../images/default-avatar.svg" class="candidate-avatar">
+            <div class="candidate-info">
+              <h2>Priya Sharma</h2>
+              <p>AI/ML Engineer · 2024</p>
+            </div>
+            <button class="save-btn saved">★</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat"><span class="label">Elo Rating</span><span class="val">2100</span></div>
+            <div class="stat"><span class="label">Hackathons</span><span class="val">2 Won</span></div>
+            <div class="stat"><span class="label">Questions</span><span class="val">450 Solved</span></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">DSA</span>
+          </div>
+          <button class="btn btn-outline" style="width:100%">View Full Portfolio</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

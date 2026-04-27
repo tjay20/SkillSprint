@@ -27,16 +27,18 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         print(f"[{self.log_date_time_string()}] {format % args}")
 
 if __name__ == "__main__":
-    with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
-        print(f"✅ Server running at http://localhost:{PORT}")
-        print(f"📁 Serving from: {DIRECTORY}")
-        print(f"\n🔗 Access your pages:")
-        print(f"   • Signup: http://localhost:{PORT}/frontend/html/signup.html")
-        print(f"   • Student Dashboard: http://localhost:{PORT}/frontend/html/student-dashboard.html")
-        print(f"   • Quiz: http://localhost:{PORT}/frontend/html/quiz.html")
-        print(f"\n⌨️  Press Ctrl+C to stop the server\n")
-        
-        try:
+    try:
+        with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
+            print(f"[SUCCESS] Server running at http://localhost:{PORT}")
+            print(f"[INFO] Serving from: {DIRECTORY}")
+            print(f"\nAccess your pages:")
+            print(f"   * Signup: http://localhost:{PORT}/frontend/html/signup.html")
+            print(f"   * Student Dashboard: http://localhost:{PORT}/frontend/html/student-dashboard.html")
+            print(f"   * Quiz: http://localhost:{PORT}/frontend/html/quiz.html")
+            print(f"\nPress Ctrl+C to stop the server\n")
+            
             httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\n✋ Server stopped")
+    except OSError as e:
+        print(f"[ERROR] Could not start server: {e}")
+    except KeyboardInterrupt:
+        print("\n[STOP] Server stopped")

@@ -5,50 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkillSprint Student Dashboard</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
     :root {
-      --bg: #050505;
-      --surface: rgba(10, 10, 10, 0.85);
-      --text: #e0ffe8;
-      --muted: rgba(224, 255, 232, 0.68);
-      --line: rgba(0, 255, 136, 0.24);
-      --primary: #00ff88;
-      --primary-dark: #00ccaa;
-      --success: #00ff88;
-      --warn: #fbbf24;
-      --radius: 14px;
-      --shadow: 0 0 28px rgba(0, 255, 136, 0.16), 0 30px 90px rgba(0, 0, 0, 0.55);
+      --bg: #0f1115;
+      --surface: rgba(20, 23, 28, 0.65);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --line: rgba(255, 255, 255, 0.15);
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --success: #10b981;
+      --warn: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
     }
 
     body {
       background: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: var(--text);
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
     }
 
-    #matrix {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
-
     .cursor-glow {
       position: fixed;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(0, 255, 136, 0.2), transparent 65%);
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 1;
-      filter: blur(35px);
+      filter: blur(40px);
     }
 
     .topbar {
@@ -56,8 +58,8 @@
       top: 0;
       z-index: 5;
       border-bottom: 1px solid var(--line);
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
     }
 
     .topbar-inner {
@@ -71,15 +73,66 @@
     }
 
     .brand {
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 14px rgba(0, 255, 136, 0.5);
+      font-weight: 900;
+      font-size: 2.6rem;
+      letter-spacing: -0.04em;
+      text-transform: none;
+      background: linear-gradient(to right, #fff, #10b981, #fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+      filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.45));
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    .brand span {
-      color: var(--primary);
+    @keyframes shine {
+      to { background-position: 200% center; }
     }
+
+    .cursor {
+      animation: blink 1s infinite;
+      -webkit-text-fill-color: var(--primary);
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* React Logo Styles */
+    .logo-react {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.6));
+    }
+
+    .react-core {
+      fill: #10b981;
+      animation: corePulse 2s infinite alternate;
+    }
+
+    .react-orbits ellipse {
+      stroke: #10b981;
+      stroke-width: 0.5;
+      opacity: 0.6;
+    }
+
+    .electron {
+      fill: #fff;
+      filter: drop-shadow(0 0 5px #10b981) drop-shadow(0 0 10px #10b981);
+    }
+
+    @keyframes corePulse {
+      from { opacity: 0.5; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1.1); }
+    }
+
+
 
     .topbar-right {
       display: flex;
@@ -267,8 +320,44 @@
 
     .grid {
       display: grid;
-      gap: 1rem;
-      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      grid-template-columns: 2fr 1.2fr;
+      align-items: start;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--line);
+    }
+
+    .stat-minimal {
+      text-align: center;
+      flex: 1;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat-minimal:last-child {
+      border-right: none;
+    }
+
+    .stat-minimal .label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+
+    .stat-minimal .value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
     }
 
     .panel {
@@ -312,7 +401,7 @@
 
     .module-list {
       display: grid;
-      gap: 0.65rem;
+      gap: 1rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -415,16 +504,43 @@
         flex-wrap: wrap;
       }
     }
+
+    .skill-graph-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    #skillCanvas {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
+    }
   </style>
     <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 <body>
   <div class="cursor-glow"></div>
-  <canvas id="matrix"></canvas>
 
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand">Skill<span>Sprint</span> Student Dashboard</div>
+      <a class="brand" href="student-dashboard.html">
+        <svg viewBox="-11.5 -10.23174 23 20.46348" class="logo-react">
+          <circle cx="0" cy="0" r="2.05" class="react-core" />
+          <g fill="none" class="react-orbits">
+            <ellipse rx="11" ry="4.2" />
+            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+            <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+          </g>
+          <circle r="0.8" class="electron">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M-11,0a11,4.2 0 1,0 22,0a11,4.2 0 1,0 -22,0" />
+          </circle>
+        </svg>
+        SkillSprint<span class="cursor">_</span>
+      </a>
       <div style="flex: 1; display: flex; gap: 0.8rem; padding: 0 1rem;">
         <input type="text" id="searchInput" placeholder="Search users, events, hackathons..." aria-label="Search users, events, and hackathons" style="background: rgba(0, 0, 0, 0.5); border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 0.5rem 0.8rem; font-size: 0.9rem; width: 200px; flex: 1; max-width: 300px;" />
       </div>
@@ -461,78 +577,85 @@
 
   <main>
     <section class="hero">
-      <h1 id="heroTitle">Welcome to your learning dashboard</h1>
-      <p>Track progress, join contests, and launch quizzes from one place.</p>
-      <p id="dashboardStatus" role="status" aria-live="polite" style="margin-top: 0.25rem; color: rgba(224, 255, 232, 0.72); font-size: 0.92rem;">Loading dashboard...</p>
-      <div class="ux-purpose-block" style="margin: 0;">
-        <h3>How to use this page</h3>
-        <p>This is your launch pad. Open one module, complete one task, then return here to track progress.</p>
-        <div class="ux-steps">
-          <div class="ux-step"><strong>Step 1:</strong> Pick a module from Quick modules.</div>
-          <div class="ux-step"><strong>Step 2:</strong> Use This week stats to monitor activity.</div>
-          <div class="ux-step"><strong>Step 3:</strong> Join live events from Active contests and hackathons.</div>
-        </div>
-      </div>
+      <h1 id="heroTitle">SkillSprint: The Future of Competitive Coding</h1>
+      <p id="dashboardStatus" role="status" aria-live="polite" style="margin-top: 0.25rem; color: #10b981; font-weight: 600; font-size: 0.92rem;">Ready for your next sprint?</p>
     </section>
 
-    <section class="grid">
+    <div class="stats-row panel">
+      <div class="stat-minimal">
+        <span class="label">Contests</span>
+        <span class="value" id="contestsJoined">0</span>
+      </div>
+      <div class="stat-minimal">
+        <span class="label">Quizzes</span>
+        <span class="value" id="quizAttempts">0</span>
+      </div>
+      <div class="stat-minimal">
+        <span class="label">Streak</span>
+        <span class="value" id="streak">0 days</span>
+      </div>
+    </div>
+
+    <div class="grid">
       <div class="panel">
         <h2>Quick modules</h2>
         <div class="module-list">
           <a class="module-card" href="contests.html">
             <h3>Contests</h3>
-            <p>Browse active coding contests and register quickly.</p>
+            <p>Active coding challenges.</p>
             <span class="state">Open</span>
           </a>
           <a class="module-card" href="quiz.html">
             <h3>Quiz</h3>
-            <p>Practice with timed MCQ rounds and improve speed.</p>
+            <p>AI-powered MCQ practice.</p>
             <span class="state warn">Practice</span>
           </a>
           <a class="module-card" href="leaderboard.html">
             <h3>Leaderboard</h3>
-            <p>Check top ranks and compare your performance.</p>
+            <p>Compare global ranks.</p>
             <span class="state">Live</span>
           </a>
-          <a class="module-card" href="profile.html">
-            <h3>Profile</h3>
-            <p>Review badges, activity, and personal metrics.</p>
-            <span class="state">Updated</span>
+          <a class="module-card" href="team-builder.html" style="border-color: #fbbf24;">
+            <h3>Team Builder</h3>
+            <p>Find hackathon squads.</p>
+            <span class="badge" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: #fbbf24;">Beta</span>
+          </a>
+          <a class="module-card" href="project-gallery.html" style="border-color: #0ea5e9;">
+            <h3>Project Gallery</h3>
+            <p>Showcase your builds.</p>
+            <span class="badge" style="background: rgba(14, 165, 233, 0.15); color: #0ea5e9; border-color: #0ea5e9;">Trending</span>
+          </a>
+          <a class="module-card" href="war-room.html" style="border-color: #f87171;">
+            <h3>War Room</h3>
+            <p>Live team collaboration.</p>
+            <span class="badge" style="background: rgba(248, 113, 113, 0.15); color: #f87171; border-color: #f87171;">Active</span>
           </a>
         </div>
       </div>
 
-      <aside class="panel">
-        <h2>This week</h2>
-        <div class="stats">
-          <div class="stat">
-            <span class="label">Contests joined</span>
-            <span class="value" id="contestsJoined">0</span>
-          </div>
-          <div class="stat">
-            <span class="label">Quiz attempts</span>
-            <span class="value" id="quizAttempts">0</span>
-          </div>
-          <div class="stat">
-            <span class="label">Current streak</span>
-            <span class="value" id="streak">0 days</span>
+      <div class="aside-panels" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="panel">
+          <h2>Neural Skill Graph</h2>
+          <div class="skill-graph-container">
+            <canvas id="skillCanvas" width="300" height="300"></canvas>
+            <p style="font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem;">AI-Analyzed Strength Profile</p>
           </div>
         </div>
-      </aside>
-    </section>
 
-    <section class="panel">
-      <h2>Active contests and hackathons</h2>
-      <div class="list" id="activityFeed">
-        <div class="list-item">
-          <div>
-            <b>Loading contest feed...</b>
-            <span>Please wait while events are synced.</span>
+        <div class="panel">
+          <h2>Active events</h2>
+          <div class="list" id="activityFeed">
+            <div class="list-item">
+              <div>
+                <b>Loading...</b>
+                <span>Syncing events.</span>
+              </div>
+            </div>
           </div>
-          <span class="badge">Live</span>
         </div>
       </div>
-    </section>
+    </div>
+
   </main>
 
   <script src="../js/api-base.js"></script>
@@ -547,49 +670,7 @@
       glow.style.top = event.clientY + "px";
     });
 
-    const matrixCanvas = document.getElementById("matrix");
-    if (matrixCanvas) {
-      const matrixContext = matrixCanvas.getContext("2d");
-
-      function resizeCanvas() {
-        matrixCanvas.width = window.innerWidth;
-        matrixCanvas.height = window.innerHeight;
-      }
-
-      resizeCanvas();
-
-      const letters = "01SYSTEMHACKACCESSGRANTED";
-      const fontSize = 14;
-      let columns = Math.floor(matrixCanvas.width / fontSize);
-      let drops = Array.from({ length: columns }).fill(1);
-
-      function drawMatrix() {
-        matrixContext.fillStyle = "rgba(0, 0, 0, 0.08)";
-        matrixContext.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-        matrixContext.fillStyle = "#00ff88";
-        matrixContext.font = fontSize + "px monospace";
-
-        drops.forEach(function (y, index) {
-          const text = letters[Math.floor(Math.random() * letters.length)];
-          matrixContext.fillText(text, index * fontSize, y * fontSize);
-
-          if (y * fontSize > matrixCanvas.height && Math.random() > 0.975) {
-            drops[index] = 0;
-          }
-
-          drops[index] += 1;
-        });
-      }
-
-      setInterval(drawMatrix, 33);
-
-      window.addEventListener("resize", function () {
-        resizeCanvas();
-        columns = Math.floor(matrixCanvas.width / fontSize);
-        drops = Array.from({ length: columns }).fill(1);
-      });
-    }
+    // Matrix canvas code removed as background is now pure CSS.
 
     function parseUser() {
       try {
@@ -685,6 +766,7 @@
       const name = user && user.name ? user.name : "Student";
       document.getElementById("heroTitle").textContent = "Hello " + name + ", ready for your next sprint?";
       setupProfileMenu(user);
+      drawSkillGraph();
       if (dashboardStatus) {
         dashboardStatus.textContent = "Loading your stats and live events...";
       }
@@ -815,6 +897,77 @@
         localStorage.removeItem("user");
         window.location.href = "../../index.html";
       });
+    }
+
+    function drawSkillGraph() {
+      const canvas = document.getElementById('skillCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = 100;
+      const levels = 5;
+      const labels = ['Logic', 'Speed', 'UI/UX', 'Backend', 'Security', 'Algo'];
+      const data = [0.85, 0.65, 0.9, 0.75, 0.55, 0.82]; // Mock data
+
+      // Draw Grid
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.15)';
+      ctx.lineWidth = 1;
+      for (let i = 1; i <= levels; i++) {
+        ctx.beginPath();
+        const levelRadius = (radius / levels) * i;
+        for (let j = 0; j < 6; j++) {
+          const angle = (Math.PI / 3) * j - Math.PI / 2;
+          const x = centerX + levelRadius * Math.cos(angle);
+          const y = centerY + levelRadius * Math.sin(angle);
+          if (j === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      // Draw Axes & Labels
+      for (let j = 0; j < 6; j++) {
+        const angle = (Math.PI / 3) * j - Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(centerX + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = '10px Inter';
+        const labelX = centerX + (radius + 20) * Math.cos(angle) - 15;
+        const labelY = centerY + (radius + 20) * Math.sin(angle) + 5;
+        ctx.fillText(labels[j], labelX, labelY);
+      }
+
+      // Draw Data Shape
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 2;
+      for (let j = 0; j < 6; j++) {
+        const angle = (Math.PI / 3) * j - Math.PI / 2;
+        const valRadius = radius * data[j];
+        const x = centerX + valRadius * Math.cos(angle);
+        const y = centerY + valRadius * Math.sin(angle);
+        if (j === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Draw Pulse Nodes
+      for (let j = 0; j < 6; j++) {
+        const angle = (Math.PI / 3) * j - Math.PI / 2;
+        const valRadius = radius * data[j];
+        ctx.fillStyle = '#10b981';
+        ctx.beginPath();
+        ctx.arc(centerX + valRadius * Math.cos(angle), centerY + valRadius * Math.sin(angle), 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
     // Search functionality

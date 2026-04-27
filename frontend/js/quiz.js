@@ -11,6 +11,7 @@ const statusEl = document.getElementById("status");
 const quizForm = document.getElementById("quiz-form");
 const resultContainer = document.getElementById("result-container");
 const quizContainer = document.getElementById("quiz-container");
+const startWebBtn = document.getElementById("start-web-btn");
 
 let questions = [];
 let randomSessionId = null;
@@ -331,6 +332,62 @@ async function startRandomSession() {
   }
 }
 
+async function startWebFetchQuiz() {
+  setStatus("Fetching questions from web intelligence feed...");
+  submitBtn.disabled = true;
+  if (startWebBtn) startWebBtn.disabled = true;
+  resultContainer.style.display = "none";
+  resetTimer();
+  if (quizContainer) quizContainer.setAttribute("aria-busy", "true");
+
+  try {
+    const response = await fetch("https://opentdb.com/api.php?amount=10&category=18&type=multiple");
+    const data = await response.json();
+
+    if (data.response_code !== 0) {
+      throw new Error("Could not fetch questions from the web database.");
+    }
+
+    questions = data.results.map((q, idx) => {
+      const allOptions = [...q.incorrect_answers, q.correct_answer];
+      // Simple shuffle
+      allOptions.sort(() => Math.random() - 0.5);
+      
+      const correctIdx = allOptions.indexOf(q.correct_answer);
+      const labels = ["A", "B", "C", "D"];
+      
+      return {
+        id: `web-${idx}`,
+        text: decodeHTML(q.question),
+        options: {
+          A: decodeHTML(allOptions[0]),
+          B: decodeHTML(allOptions[1]),
+          C: decodeHTML(allOptions[2]),
+          D: decodeHTML(allOptions[3]),
+        },
+        correct: labels[correctIdx]
+      };
+    });
+
+    renderQuestions(questions);
+    submitBtn.disabled = false;
+    currentMode = "web";
+    startTimer();
+    setStatus("Live Web Quiz Loaded: 10 Questions sourced from OpenTDB.");
+  } catch (error) {
+    setStatus(error.message, true);
+  } finally {
+    if (startWebBtn) startWebBtn.disabled = false;
+    if (quizContainer) quizContainer.removeAttribute("aria-busy");
+  }
+}
+
+function decodeHTML(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
+
 async function submitAnswers(options = {}) {
   const { autoSubmit = false } = options;
   if (!questions.length) {
@@ -443,5 +500,8 @@ loadBtn.addEventListener("click", loadQuestions);
 submitBtn.addEventListener("click", () => submitAnswers({ autoSubmit: false }));
 if (startRandomBtn) {
   startRandomBtn.addEventListener("click", startRandomSession);
+}
+if (startWebBtn) {
+  startWebBtn.addEventListener("click", startWebFetchQuiz);
 }
 quizForm.addEventListener("change", handleQuestionChange);

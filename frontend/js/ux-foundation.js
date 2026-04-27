@@ -181,6 +181,198 @@
     });
   }
 
+  function wireAuraAI() {
+    if (document.getElementById('aura-ai-fab')) {
+      return;
+    }
+
+    const fab = document.createElement('button');
+    fab.type = 'button';
+    fab.id = 'aura-ai-fab';
+    fab.className = 'aura-ai-fab';
+    fab.innerHTML = '<span>✨</span> Aura AI';
+
+    const panel = document.createElement('div');
+    panel.className = 'aura-ai-panel';
+    panel.id = 'aura-ai-panel';
+    panel.innerHTML = [
+      '<div class="aura-header">',
+      '  <div class="aura-status"><span class="pulse"></span> Aura AI Online</div>',
+      '  <button type="button" id="aura-close" style="background:none;border:none;color:#fff;cursor:pointer;">✕</button>',
+      '</div>',
+      '<div class="aura-messages" id="aura-messages">',
+      '  <div class="aura-msg system">Hello! I am Aura, your SkillSprint AI Mentor. How can I help your sprint today?</div>',
+      '</div>',
+      '<div class="aura-input-area">',
+      '  <input type="text" id="aura-input" placeholder="Ask Aura anything...">',
+      '  <button type="button" id="aura-send">⚡</button>',
+      '</div>'
+    ].join('');
+
+    document.body.appendChild(fab);
+    document.body.appendChild(panel);
+
+    fab.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      fab.classList.toggle('active', isOpen);
+      if (isOpen) {
+        document.getElementById('aura-input').focus();
+      }
+    });
+
+    document.getElementById('aura-close').addEventListener('click', () => {
+      panel.classList.remove('open');
+      fab.classList.remove('active');
+    });
+
+    const input = document.getElementById('aura-input');
+    const send = document.getElementById('aura-send');
+    const messages = document.getElementById('aura-messages');
+
+    function addMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.className = `aura-msg ${type}`;
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    async function handleSend() {
+      const val = input.value.trim();
+      if (!val) return;
+      addMessage(val, 'user');
+      input.value = '';
+      
+      const loadingMsg = document.createElement('div');
+      loadingMsg.className = 'aura-msg system';
+      loadingMsg.textContent = 'Aura is thinking...';
+      messages.appendChild(loadingMsg);
+      messages.scrollTop = messages.scrollHeight;
+
+      try {
+        const API_BASE = window.API_BASE_URL || "http://127.0.0.1:8000";
+        const response = await fetch(`${API_BASE}/ai/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: val })
+        });
+        const data = await response.json();
+        loadingMsg.textContent = data.response;
+      } catch (err) {
+        loadingMsg.textContent = "I'm having trouble connecting to my neural network. Please check the backend!";
+      }
+    }
+
+    if (send) send.addEventListener('click', handleSend);
+    if (input) input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSend();
+    });
+  }
+
+  function wireNeuralBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'neural-bg';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '-2';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.opacity = '0.9';
+    document.body.prepend(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 70;
+    const maxDistance = 150;
+    let mouse = { x: null, y: null };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.8)';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        p.update();
+        p.draw();
+        for (let j = index + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < maxDistance) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            const opacity = 1 - distance / maxDistance;
+            ctx.strokeStyle = `rgba(16, 185, 129, ${opacity * 0.5})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+        if (mouse.x) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 200) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.1 * (1 - dist / 200)})`;
+            ctx.stroke();
+          }
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      initParticles();
+    });
+
+    resize();
+    initParticles();
+    animate();
+  }
+
   function init() {
     injectSkipLink();
     wireAriaLabels();
@@ -188,6 +380,8 @@
     wireNavToggle();
     wireKeyboardEscape();
     wireFeedbackDialog();
+    wireNeuralBackground();
+    wireAuraAI();
     window.SkillSprintUX = UX;
   }
 

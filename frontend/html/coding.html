@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkillSprint | Coding Contest</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/coding.css">
     <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 
 <body>
 
-  <!-- NEON BACKGROUND -->
-  <canvas id="neon-bg"></canvas>
+
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -22,7 +23,7 @@
         <a class="nav-link" href="quiz.html">Quiz</a>
         <a class="nav-link" href="leaderboard.html">Leaderboard</a>
         <a class="nav-link" href="profile.html">Profile</a>
-        <a class="nav-link" href="message.html">Message</a>
+        <button id="multiplayerToggleBtn" class="btn btn-outline" style="margin: 0; padding: 0.3rem 0.8rem; font-size: 0.8rem; border-color: #fbbf24; color: #fbbf24;">⚔️ 1v1 Battle</button>
       </nav>
     </div>
   </header>
@@ -104,12 +105,31 @@
         </div>
       </div>
     </div>
+
+    <!-- AI MENTOR PANEL -->
+    <div class="ai-panel">
+      <div class="card ai-card">
+        <div class="ai-header">
+          <h3>🧠 AI Mentor</h3>
+          <span class="ai-status">Online</span>
+        </div>
+        <div class="ai-chat-area">
+          <div class="ai-message">
+            <p>I'm here to help you optimize your time and space complexity without giving away the direct answer. What do you need help with?</p>
+          </div>
+        </div>
+        <div class="ai-input-area">
+          <input type="text" placeholder="Ask for a hint..." class="ai-input">
+          <button class="ai-send-btn">➤</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- JS FILES -->
   <script src="../js/api-base.js"></script>
   <script src="../js/coding.js"></script>
-  <script src="../js/neonBackground.js"></script>
+
 
     <script src="../js/ux-foundation.js"></script>
 </body>

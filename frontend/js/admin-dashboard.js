@@ -923,6 +923,204 @@
     }
   }
 
+  // Student Results Management
+  async function filterStudentResults() {
+    const year = document.getElementById("resultYear").value || null;
+    const branch = document.getElementById("resultBranch").value || null;
+    const division = document.getElementById("resultDivision").value || null;
+    const subject = document.getElementById("resultSubject").value || null;
+    const statusDiv = document.getElementById("resultsStatus");
+    const feed = document.getElementById("studentResultsFeed");
+
+    if (statusDiv) {
+      statusDiv.textContent = "Loading...";
+      statusDiv.style.color = "#cbd5e1";
+    }
+
+    try {
+      const params = new URLSearchParams();
+      if (year) params.append("year", year);
+      if (branch) params.append("branch", branch);
+      if (division) params.append("division", division);
+      if (subject) params.append("subject", subject);
+
+      const response = await fetch(
+        API_BASE + "/results/admin/students?" + params.toString(),
+        { headers: authHeaders() }
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Failed to load results");
+      }
+
+      if (statusDiv) {
+        statusDiv.textContent = "Loaded " + data.length + " student results";
+        statusDiv.style.color = "#10b981";
+      }
+
+      if (feed) {
+        if (!data || data.length === 0) {
+          feed.innerHTML = "<div class=\"list-item\"><div><b>No results found</b><span>Try adjusting your filters.</span></div><span class=\"badge\">-</span></div>";
+          return;
+        }
+
+        feed.innerHTML = data
+          .slice(0, 50)
+          .map(function (result) {
+            return "<div class=\"list-item\"><div><b>" +
+              escapeHtml(result.name || "Student") +
+              " (" +
+              escapeHtml(result.srn || result.email || "-") +
+              ")</b><span>Score: " +
+              escapeHtml(String(result.quiz_score ?? 0)) +
+              " / " +
+              escapeHtml(String(result.total_questions ?? 0)) +
+              " | Submissions: " +
+              escapeHtml(String(result.submission_count ?? 0)) +
+              "</span></div><span class=\"badge\">" +
+              escapeHtml(String(result.quiz_score ?? 0)) +
+              "</span></div>";
+          })
+          .join("");
+      }
+    } catch (error) {
+      if (statusDiv) {
+        statusDiv.textContent = "Error: " + (error.message || "Failed to load");
+        statusDiv.style.color = "#ffb4b4";
+      }
+      if (feed) {
+        feed.innerHTML = "<div class=\"list-item\"><div><b>Could not load results</b><span>" + escapeHtml(error.message || "Try again") + "</span></div><span class=\"badge\">Error</span></div>";
+      }
+    }
+  }
+
+  async function toggleResultVisibility() {
+    const year = document.getElementById("visYear").value;
+    const branch = document.getElementById("visBranch").value;
+    const division = document.getElementById("visDivision").value;
+    const subject = document.getElementById("visSubject").value;
+    const isOnline = document.getElementById("visIsOnline").checked;
+    const statusDiv = document.getElementById("visibilityStatus");
+
+    if (!year || !branch || !division || !subject) {
+      if (statusDiv) {
+        statusDiv.textContent = "Please fill in all fields";
+        statusDiv.style.color = "#ffb4b4";
+      }
+      return;
+    }
+
+    if (statusDiv) {
+      statusDiv.textContent = "Updating...";
+      statusDiv.style.color = "#cbd5e1";
+    }
+
+    try {
+      const params = new URLSearchParams({
+        year: year,
+        branch: branch,
+        division: division,
+        subject: subject
+      });
+
+      const response = await fetch(
+        API_BASE + "/results/admin/visibility?" + params.toString(),
+        {
+          method: "PUT",
+          headers: authHeaders(true),
+          body: JSON.stringify({ is_online: isOnline })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Failed to update visibility");
+      }
+
+      if (statusDiv) {
+        statusDiv.textContent = "Visibility updated: Results are now " + (isOnline ? "ONLINE" : "OFFLINE");
+        statusDiv.style.color = "#10b981";
+      }
+    } catch (error) {
+      if (statusDiv) {
+        statusDiv.textContent = "Error: " + (error.message || "Failed to update");
+        statusDiv.style.color = "#ffb4b4";
+      }
+    }
+  }
+
+  // Auto Questions Generation
+  async function generateQuestionsWithGemini() {
+    const topic = document.getElementById("genTopic").value;
+    const language = document.getElementById("genLanguage").value;
+    const difficulty = document.getElementById("genDifficulty").value;
+    const count = parseInt(document.getElementById("genCount").value) || 5;
+    const statusDiv = document.getElementById("generateStatus");
+    const feed = document.getElementById("generatedQuestionsFeed");
+
+    if (!topic || !language) {
+      if (statusDiv) {
+        statusDiv.textContent = "Please enter topic and language";
+        statusDiv.style.color = "#ffb4b4";
+      }
+      return;
+    }
+
+    if (statusDiv) {
+      statusDiv.textContent = "Generating questions with Gemini AI...";
+      statusDiv.style.color = "#cbd5e1";
+    }
+
+    try {
+      const response = await fetch(API_BASE + "/ai/generate-questions", {
+        method: "POST",
+        headers: authHeaders(true),
+        body: JSON.stringify({
+          topic: topic,
+          language: language,
+          difficulty: difficulty,
+          count: count
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Failed to generate questions");
+      }
+
+      if (statusDiv) {
+        statusDiv.textContent = "Generated " + data.length + " questions successfully";
+        statusDiv.style.color = "#10b981";
+      }
+
+      if (feed) {
+        if (!data || data.length === 0) {
+          feed.innerHTML = "<div class=\"list-item\"><div><b>No questions generated</b><span>Please try again.</span></div><span class=\"badge\">-</span></div>";
+          return;
+        }
+
+        feed.innerHTML = data
+          .map(function (question, index) {
+            return "<div class=\"list-item\"><div><b>Q" + (index + 1) + ": " + escapeHtml(question.text.substring(0, 60)) + "...</b><span>" +
+              "Correct: " + escapeHtml(question.correct_option) +
+              "</span></div><span class=\"badge\">MCQ</span></div>";
+          })
+          .join("");
+      }
+    } catch (error) {
+      if (statusDiv) {
+        statusDiv.textContent = "Error: " + (error.message || "Failed to generate");
+        statusDiv.style.color = "#ffb4b4";
+      }
+      if (feed) {
+        feed.innerHTML = "<div class=\"list-item\"><div><b>Could not generate questions</b><span>" + escapeHtml(error.message || "Try again") + "</span></div><span class=\"badge\">Error</span></div>";
+      }
+    }
+  }
+
   document.getElementById("createContestBtn").addEventListener("click", createContest);
   document.getElementById("createHackathonBtn").addEventListener("click", createHackathon);
   document.getElementById("createQuestionBtn").addEventListener("click", createQuestion);
@@ -930,6 +1128,9 @@
   document.getElementById("createQuizBtn").addEventListener("click", createQuizTest);
   document.getElementById("createQuizQuestionBtn").addEventListener("click", createQuizQuestion);
   document.getElementById("loadQuizSubmissionsBtn").addEventListener("click", loadQuizSubmissionFeed);
+  document.getElementById("filterStudentResultsBtn").addEventListener("click", filterStudentResults);
+  document.getElementById("toggleVisibilityBtn").addEventListener("click", toggleResultVisibility);
+  document.getElementById("generateQuestionsBtn").addEventListener("click", generateQuestionsWithGemini);
   document.getElementById("testContestId").addEventListener("change", function (event) {
     populateProblemSelect(event.target.value);
   });

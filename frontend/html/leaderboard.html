@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillSprint - Leaderboard</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/info-pages.css">
   <link rel="stylesheet" href="../css/leaderboard.css">
   <link rel="stylesheet" href="../css/ux-foundation.css">
 </head>
 <body>
   <div class="cursor-glow"></div>
-  <canvas id="matrix"></canvas>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -27,30 +28,19 @@
   </header>
 
   <main class="page">
-    <section class="hero">
-      <h1>College Leaderboard</h1>
-      <p>Track top performers based on quiz performance, contest activity, and overall participation.</p>
-      <div class="stats">
-        <div class="stat">Live Rankings</div>
-        <div class="stat">Points-Based System</div>
-        <div class="stat">Quiz Activity</div>
-        <div class="stat">Contest Activity</div>
+    <header class="visual-page-header">
+      <div class="visual-header-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6 9c0 0 0 5 6 5s6-5 6-5" class="neon-path" />
+          <path d="M12 14v3M7 21h10M12 17H9m3 0h3" class="neon-path" />
+          <path d="M6 9H4.5C3.12 9 2 7.88 2 6.5S3.12 4 4.5 4H6m12 5h1.5c1.38 0 2.5-1.12 2.5-2.5S20.88 4 19.5 4H18" class="neon-path" />
+          <path d="M6 4h12v5c0 3.31-2.69 6-6 6s-6-2.69-6-6V4z" class="neon-path" />
+        </svg>
       </div>
-    </section>
-
-    <section class="ux-purpose-block" aria-label="Leaderboard guide">
-      <h3>How to use leaderboard</h3>
-      <p>Use this page to identify top performers and compare your score progression over time.</p>
-      <div class="ux-steps">
-        <div class="ux-step"><strong>Step 1:</strong> Click Refresh Live Rankings to sync with backend.</div>
-        <div class="ux-step"><strong>Step 2:</strong> Start with Podium View for top 3 overview.</div>
-        <div class="ux-step"><strong>Step 3:</strong> Switch to Full Rankings to inspect broader ranks.</div>
-      </div>
-      <ul class="ux-key-map">
-        <li>Podium View: highlights rank 1 to 3 summary cards.</li>
-        <li>Full Rankings: shows rank 4 onward for detailed comparison.</li>
-      </ul>
-    </section>
+      <h1 class="visual-title">SkillSprint <span>Elite</span></h1>
+      <p class="visual-sub">Real-time rankings based on algorithmic precision and speed.</p>
+      <div class="visual-badge">🏆 Live Rankings / Global</div>
+    </header>
 
     <section class="panel">
       <div class="leaderboard-header">
